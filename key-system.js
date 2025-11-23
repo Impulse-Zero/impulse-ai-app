@@ -27,9 +27,9 @@ class KeySystem {
         // Создаем хэш ключа для проверки
         const keyHash = crypto.createHash('sha256').update(inputKey).digest('hex');
         
-        // Список валидных хэшей ключей (добавляйте сюда хэши реальных ключей)
+        // Список валидных хэшей ключей
         const validKeyHashes = [
-            'a1b2c3d4e5f6789012345678901234567890123456789012345678901234', // Пример
+            'a1b2c3d4e5f6789012345678901234567890123456789012345678901234',
         ];
 
         // Также проверяем по алгоритму генерации
@@ -101,10 +101,11 @@ class KeySystem {
             const interfaces = require('os').networkInterfaces();
             let mac = '';
             
+            // ИСПРАВЛЕННАЯ СТРОКА - убрал 'const interface'
             for (const name in interfaces) {
-                for (const interface of interfaces[name]) {
-                    if (!interface.internal && interface.mac) {
-                        mac = interface.mac;
+                for (const netInterface of interfaces[name]) {
+                    if (!netInterface.internal && netInterface.mac) {
+                        mac = netInterface.mac;
                         break;
                     }
                 }
